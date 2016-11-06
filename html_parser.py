@@ -1,6 +1,7 @@
 import pdb
 import re
 import urlparse
+import urllib2
 from bs4 import BeautifulSoup
 
 class HtmlParser(object):
@@ -39,3 +40,14 @@ class HtmlParser(object):
 
         #pdb.set_trace()
         return res_data
+
+    def download(self, url):
+        if url is None:
+            return None
+
+        response = urllib2.urlopen(url,timeout=30)
+
+        if response.getcode() != 200:
+            return None
+
+        return response.read()

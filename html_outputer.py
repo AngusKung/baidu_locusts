@@ -2,18 +2,18 @@
 import pdb
 
 class HtmlOutputer(object):
-    #初始化
+    
     def __init__(self):
         self.datas = []
 
-    def collect_data(self, data):   #收集数据
+    def collect_data(self, data):
         if data is None:
             return
         self.datas.append(data)
 
-    def output_html(self):  #输出数据
-        fout = open('txt/title_summary.txt', 'w')
-        fout2 = open('txt/title.txt','w')
+    def output_html(self, count):
+        fout = open('txt/title_summary_'+(count%1000)+'k.txt', 'w')
+        fout2 = open('txt/title_'+(count%1000)+'k.txt','w')
 
         for data in self.datas:
             fout.write(data['title'].encode('utf-8')+' ')
@@ -22,3 +22,6 @@ class HtmlOutputer(object):
 
         fout.close()
         fout2.close()
+    
+    def reset_datas(self):
+        self.datas = [] 
