@@ -7,5 +7,5 @@ urllib2
 Beautifulsoup (bs4)
 
 ### Usage
->mkdir txt;mkdir urls
+>mkdir txt;mkdir urls<br/>
 >python locusts_main [-new] [-load PATH]
