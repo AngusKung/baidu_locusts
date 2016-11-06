@@ -1,10 +1,17 @@
 # coding=utf-8
+import cPickle
+
 class UrlManager(object):
 
-    def __init__(self):
-         self.new_urls = set()
-         self.crawled_urls = set()
-
+    def __init__(self,path):
+        if len(path) == 0:
+            self.new_urls = set()
+            self.crawled_urls = set()
+        else:    
+            with open(path,'rb') as fin:
+                self.new_urls = fin.load
+                self.crawled_urls = fin.load
+    
     def add_new_url(self, url):
         if url is None:
             return
@@ -26,9 +33,9 @@ class UrlManager(object):
         return new_url
 
     def save_urls(self,count):
-        with open('urls/urls_'+(count%1000)'+k.pkl','wb') as fout:
+        with open('urls/urls_'+(count%1000)+'+k.pkl','wb') as fout:
             cPickle.dump(self.new_urls,fout)
             cPickle.dump(self.crawled_urls,fout)
-        print "URLs have been pickled
+        print "URLs have been pickled"
     
 

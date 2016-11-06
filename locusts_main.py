@@ -1,15 +1,26 @@
 # coding=utf-8
+import argparse
+import sys
+
 import url_manager,html_parser,html_outputer
 
 class LocustsMain(object):
-    def __init__(self):
-        self.urls = url_manager.UrlManager() 
+
+    def __init__(self,path=""):
+        self.urls = url_manager.UrlManager(path)
         self.parser = html_parser.HtmlParser()
         self.outputer = html_outputer.HtmlOutputer()
+        self.root_url = "http://baike.baidu.com/view/21087.htm"
+        self.path = path
+        self.new = True if len(path)==0 else False
 
-    def craw(self, root_url):
-        count = 1
-        self.urls.add_new_url(root_url)
+    def crawl(self):
+        if self.new:
+            count = 1
+            self.urls.add_new_url(self.root_url)
+        else:
+            count = int(self.path.split('_')[1].split('k')[0])
+
         while self.urls.has_new_url():
             try:
                 new_url = self.urls.get_new_url()
@@ -34,6 +45,19 @@ class LocustsMain(object):
                 self.urls.save_urls(count)
 
 if __name__=="__main__":
-    root_url = "http://baike.baidu.com/view/21087.htm"
-    obj_locusts = LocustsMain()
-    obj_locusts.craw(root_url)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-new', help='Start a whole new crawling session', action="store_true")
+    parser.add_argument('-load', help='Load urls in pickle form and continue crawling', dest="path", action="store")
+    
+    if len(sys.argv[1:])==0:
+        parser.print_help()
+        parser.exit()
+    args = parser.parse_args()
+
+    if args.new:
+        obj_locusts = LocustsMain()
+        obj_locusts.crawl()
+    else:
+        obj_locusts = LocustsMain(args.path)
+        obj_locusts.crawl()
+        
