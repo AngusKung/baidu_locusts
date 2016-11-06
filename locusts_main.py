@@ -47,7 +47,7 @@ class LocustsMain(object):
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-new', help='Start a whole new crawling session', action="store_true")
-    parser.add_argument('-load', help='Load urls in pickle form and continue crawling', dest="path", action="store")
+    parser.add_argument('-load', help='Load former urls in pickle form and continue crawling', dest="path", action="store")
     
     if len(sys.argv[1:])==0:
         parser.print_help()
