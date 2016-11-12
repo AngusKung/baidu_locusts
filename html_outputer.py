@@ -12,8 +12,8 @@ class HtmlOutputer(object):
         self.datas.append(data)
 
     def output_html(self, count):
-        fout = open('txt/title_summary_'+(count%1000)+'k.txt', 'w')
-        fout2 = open('txt/title_'+(count%1000)+'k.txt','w')
+        fout = open('txt/title_summary_'+str(count/1000)+'k.txt', 'w')
+        fout2 = open('txt/title_'+str(count/1000)+'k.txt','w')
 
         for data in self.datas:
             fout.write(data['title'].encode('utf-8')+' ')

@@ -33,7 +33,7 @@ class UrlManager(object):
         return new_url
 
     def save_urls(self,count):
-        with open('urls/urls_'+(count%1000)+'+k.pkl','wb') as fout:
+        with open('urls/urls_'+str(count/1000)+'+k.pkl','wb') as fout:
             cPickle.dump(self.new_urls,fout)
             cPickle.dump(self.crawled_urls,fout)
         print "URLs have been pickled"

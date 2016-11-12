@@ -14,7 +14,6 @@ def readNcut(inputfile,outputfile):
         rough_news.append(jieba.cut(passage, cut_all=False))
 
     news = []
-    print "Output 精確模式 Full Mode："
     for passages in rough_news:
         words = []
         for word in passages:
