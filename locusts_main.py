@@ -39,10 +39,15 @@ class LocustsMain(object):
 
             if count % 100 == 0:
                 print "URLs to crawl:",len(self.urls.new_urls)
-            if count % 10000 == 0:
+            if count % 100000 == 0:
                 self.outputer.output_html(count)
                 self.outputer.reset_datas
                 self.urls.save_urls(count)
+	   
+       	self.outputer.output_html(count)
+        self.outputer.reset_datas
+        self.urls.save_urls(count)
+	
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()

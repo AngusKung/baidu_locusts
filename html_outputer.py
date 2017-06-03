@@ -24,4 +24,4 @@ class HtmlOutputer(object):
         fout2.close()
     
     def reset_datas(self):
-        self.datas = [] 
+        del self.datas[:] 
